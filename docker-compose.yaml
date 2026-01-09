@@ -30,7 +30,7 @@ services:
     image: rumarsky/orng-schedule:latest
     container_name: schedule-service
     ports:
-      - "${SS_PORT:-8083}:8080"
+      - "${SS_PORT:-8083}:8081"
     environment:
       DB_URL: jdbc:postgresql://database:${PG_PORT:-5432}/${DB_NAME:-orng}?currentSchema=orng_schedule
       DB_USER: ${DB_USER:-orng}
