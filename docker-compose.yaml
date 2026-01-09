@@ -14,7 +14,7 @@ services:
       - database
 
   employee-service:
-    image: bitmaximum/orng-employee:latest
+    image: rumarsky/orng-employee:latest
     container_name: employee-service
     ports:
       - "${EM_PORT:-8082}:8080"
@@ -27,7 +27,7 @@ services:
     restart: unless-stopped
 
   schedule-service:
-    image: bitmaximum/orng-schedule:latest
+    image: rumarsky/orng-schedule:latest
     container_name: schedule-service
     ports:
       - "${SS_PORT:-8083}:8080"
@@ -51,6 +51,9 @@ services:
       - POSTGRES_DB=orng
     volumes:
       - db:/var/lib/postgresql/data postgres
+      - type: bind
+        source: ./init.sql
+        target: /docker-entrypoint-initdb.d/init.sql
     ports:
       - "5432:5432"
 

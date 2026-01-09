@@ -1,0 +1,14 @@
+CREATE SCHEMA IF NOT EXISTS orng_auth;
+
+CREATE TABLE IF NOT EXISTS orng_auth.roles
+(
+    id   BIGSERIAL PRIMARY KEY,
+    code VARCHAR(128) NOT NULL UNIQUE
+);
+
+
+INSERT INTO orng_auth.roles (code)
+VALUES ('ROLE_DEFAULT'),
+       ('ROLE_ADMIN'),
+       ('ROLE_MANAGER')
+ON CONFLICT (code) DO NOTHING;
