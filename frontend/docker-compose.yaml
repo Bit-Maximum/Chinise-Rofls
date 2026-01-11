@@ -1,0 +1,13 @@
+services:
+
+  orng-frontend:
+    image: bitmaximum/orng-frontend:latest
+    container_name: ${FRONTEND_HOSTNAME:-orng-frontend}
+    hostname: ${FRONTEND_HOSTNAME:-orng-frontend}
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    environment:
+      AUTH_BASE_URL: ${FRONTEND_AUTH_BASE_URL:-https://auth.kiberorange.ru}
+      EMPLOYEE_BASE_URL: ${FRONTEND_EMPLOYEE_BASE_URL:-https://employee.kiberorange.ru}
+      SCHEDULE_BASE_URL: ${FRONTEND_SCHEDULE_BASE_URL:-https://schedule.kiberorange.ru}
