@@ -9,31 +9,11 @@ services:
       - "81:81"   # WEB UI
       - "443:443"
     environment:
-      DB_POSTGRES_HOST: postgres-nginx
-      DB_POSTGRES_PORT: 5432
-      DB_POSTGRES_USER: npm
-      DB_POSTGRES_PASSWORD: npm
-      DB_POSTGRES_NAME: npm
+      TZ: "Asia/Vladivostok"
     volumes:
       - npm_data:/data
       - npm_letsencrypt:/etc/letsencrypt
-    depends_on:
-      - database
-
-  database:
-    image: 'postgres:18-alpine'
-    container_name: 'postgres-nginx'
-    restart: always
-    environment:
-      POSTGRES_USER: npm
-      POSTGRES_PASSWORD: npm
-      POSTGRES_DB: npm
-    volumes:
-      - db:/var/lib/postgresql/data postgres
-    ports:
-      - "5432"
 
 volumes:
   npm_data:
   npm_letsencrypt:
-  db:
