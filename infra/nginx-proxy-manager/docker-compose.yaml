@@ -31,7 +31,7 @@ services:
     volumes:
       - db:/var/lib/postgresql/data postgres
     ports:
-      - "5432:5432"
+      - "5432"
 
 volumes:
   npm_data:

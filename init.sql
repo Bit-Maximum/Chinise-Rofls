@@ -54,7 +54,7 @@ ON CONFLICT (username) DO NOTHING;
 INSERT INTO orng_auth.user_role (user_id, role_id)
 SELECT
     (SELECT id FROM orng_auth.users WHERE username = 'user'),
-    (SELECT id FROM orng_auth.roles WHERE code = 'ROLE_DEFAULT'
+    (SELECT id FROM orng_auth.roles WHERE code = 'ROLE_DEFAULT')
 ON CONFLICT (user_id, role_id) DO NOTHING;
 
 INSERT INTO orng_auth.user_role (user_id, role_id)
