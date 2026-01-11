@@ -7,11 +7,67 @@ CREATE TABLE IF NOT EXISTS orng_auth.roles
 );
 
 
+CREATE TABLE IF NOT EXISTS orng_auth.users
+(
+    id         BIGSERIAL PRIMARY KEY,
+    username   VARCHAR(255) NOT NULL UNIQUE,
+    is_enabled BOOLEAN      NOT NULL DEFAULT TRUE,
+    password   VARCHAR(255) NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_user_id ON orng_auth.users(id);
+CREATE INDEX IF NOT EXISTS idx_username ON orng_auth.users(username);
+
+CREATE TABLE IF NOT EXISTS orng_auth."user_role"
+(
+    role_id BIGINT NOT NULL,
+    user_id BIGINT NOT NULL,
+    CONSTRAINT pk_user_role UNIQUE (user_id, role_id),
+
+    CONSTRAINT fk_user_role_user
+        FOREIGN KEY (user_id)
+            REFERENCES users (id)
+            ON DELETE CASCADE,
+
+    CONSTRAINT fk_user_role_role
+        FOREIGN KEY (role_id)
+            REFERENCES roles (id)
+            ON DELETE CASCADE
+
+);
+
+
 INSERT INTO orng_auth.roles (code)
 VALUES ('ROLE_DEFAULT'),
        ('ROLE_ADMIN'),
        ('ROLE_MANAGER')
 ON CONFLICT (code) DO NOTHING;
+
+
+INSERT INTO orng_auth.users (username, password) VALUES
+    ('user', '$2a$10$LPV2ChWbz94o41FSvTneZuOTFK2A1CLEQMNrRGVwotWvRmKTb2UIC'),
+    ('manager', '$2a$10$LPV2ChWbz94o41FSvTneZuOTFK2A1CLEQMNrRGVwotWvRmKTb2UIC'),
+    ('admin', '$2a$10$LPV2ChWbz94o41FSvTneZuOTFK2A1CLEQMNrRGVwotWvRmKTb2UIC')
+ON CONFLICT (username) DO NOTHING;
+
+
+INSERT INTO orng_auth.user_role (user_id, role_id)
+SELECT
+    (SELECT id FROM orng_auth.users WHERE username = 'user'),
+    (SELECT id FROM orng_auth.roles WHERE code = 'ROLE_DEFAULT'
+ON CONFLICT (user_id, role_id) DO NOTHING;
+
+INSERT INTO orng_auth.user_role (user_id, role_id)
+SELECT
+    (SELECT id FROM orng_auth.users WHERE username = 'manager'),
+    (SELECT id FROM orng_auth.roles WHERE code = 'ROLE_MANAGER')
+ON CONFLICT (user_id, role_id) DO NOTHING;
+
+INSERT INTO orng_auth.user_role (user_id, role_id)
+SELECT
+    (SELECT id FROM orng_auth.users WHERE username = 'admin'),
+    (SELECT id FROM orng_auth.roles WHERE code = 'ROLE_ADMIN')
+ON CONFLICT (user_id, role_id) DO NOTHING;
 
 
 create schema if not exists orng_schedule;
