@@ -31,7 +31,7 @@ services:
     restart: unless-stopped
 
   schedule-service:
-    image: bitmaximum/orng-schedule:latest
+    image: rumarsky/orng-schedule:latest
     container_name: schedule-service
     ports:
       - "${SS_PORT:-8083}:8080"
