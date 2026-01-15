@@ -1,20 +1,17 @@
 CREATE SCHEMA IF NOT EXISTS orng_auth;
 
-CREATE TABLE IF NOT EXISTS orng_auth.scopes
+CREATE TABLE IF NOT EXISTS orng_auth.roles
 (
-    id      BIGSERIAL PRIMARY KEY,
-    content VARCHAR(128) NOT NULL UNIQUE
+    id   BIGSERIAL PRIMARY KEY,
+    code VARCHAR(128) NOT NULL UNIQUE
 );
 
 
-INSERT INTO orng_auth.scopes (content)
+INSERT INTO orng_auth.roles (code)
 VALUES ('ROLE_DEFAULT'),
        ('ROLE_ADMIN'),
-       ('ROLE_MANAGER'),
-       ('events:read'),
-       ('employees:read_short'),
-       ('offices:read')
-ON CONFLICT (content) DO NOTHING;
+       ('ROLE_MANAGER')
+ON CONFLICT (code) DO NOTHING;
 
 
 create schema if not exists orng_schedule;
