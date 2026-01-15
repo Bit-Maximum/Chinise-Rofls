@@ -13,7 +13,8 @@ services:
       ACCESS_TOKEN_EXIRATION_SECONDS: 300
       REFRESH_TOKEN_EXIRATION_SECONDS: 604800
       JWT-ISSUER: orng-auth
-      JWT-DEFAULT-USER-SCOPES: events:read, employees:read_short, offices:read
+      JWT-DEFAULT-USER-SCOPES: ROLE_DEFAULT
+      LOGGING_LEVEL_DEFAULT: TRACE
     depends_on:
       - database
 
@@ -26,6 +27,7 @@ services:
       DB_URL: jdbc:postgresql://database:${PG_PORT:-5432}/${DB_NAME:-orng}?currentSchema=orng_employee
       DB_USER: ${DB_USER:-orng}
       DB_PASS: ${DB_PASS:-orng}
+      LOGGING_LEVEL_DEFAULT: TRACE
     depends_on:
       - database
     restart: unless-stopped
@@ -41,6 +43,7 @@ services:
       DB_PASS: ${DB_PASS:-orng}
       SERVER_PORT: 8080
       EMPLOYEE_SERVICE_URL: employee-service:8080
+      LOGGING_LEVEL_DEFAULT: TRACE
     depends_on:
       - database
       - employee-service
