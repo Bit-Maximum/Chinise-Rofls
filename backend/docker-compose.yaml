@@ -1,7 +1,7 @@
 services:
 
   orng-auth:
-    image: bitmaximum/auth-service:latest
+    image: bitmaximum/orng-auth:latest
     container_name: orng-auth
     restart: unless-stopped
     ports:
