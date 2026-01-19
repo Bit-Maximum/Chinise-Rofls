@@ -1,7 +1,7 @@
 services:
 
   orng-auth:
-    image: bitmaximum/orng-auth:1.0.2
+    image: bitmaximum/orng-auth:latest
     container_name: orng-auth
     restart: unless-stopped
     ports:
@@ -14,6 +14,21 @@ services:
       REFRESH_TOKEN_EXIRATION_SECONDS: 604800
       JWT-ISSUER: orng-auth
       JWT-DEFAULT-USER-SCOPES: ROLE_DEFAULT
+      LOGGING_LEVEL_DEFAULT: TRACE
+    depends_on:
+      - database
+
+  orng-office:
+    image: bitmaximum/orng-office:latest
+    container_name: orng-office
+    restart: unless-stopped
+    ports:
+      - "${OFFICE_PORT:-8081}:8080"
+    environment:
+      DB_URL: jdbc:postgresql://database:${PG_PORT:-5432}/${DB_NAME:-orng}?currentSchema=orng_office
+      DB_USER: ${DB_USER:-orng}
+      DB_PASS: ${DB_PASS:-orng}
+      JWT-ISSUER: orng-auth
       LOGGING_LEVEL_DEFAULT: TRACE
     depends_on:
       - database
