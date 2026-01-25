@@ -139,39 +139,18 @@ on conflict do nothing;
 
 CREATE SCHEMA IF NOT EXISTS orng_office;
 
-CREATE TABLE IF NOT EXISTS orng_office.regions
+CREATE TABLE IF NOT EXISTS orng_office.offices
 (
-    id   BIGSERIAL   NOT NULL,
-    name VARCHAR(64) NOT NULL,
-    code VARCHAR(16) NOT NULL UNIQUE,
-    CONSTRAINT pk_regions PRIMARY KEY (id)
-);
-
-CREATE TABLE IF NOT EXISTS orng_office.cities
-(
-    id        BIGSERIAL   NOT NULL,
-    region_id BIGINT      NOT NULL,
-    name      VARCHAR(64) NOT NULL,
-    code      VARCHAR(8)  NOT NULL UNIQUE,
-    CONSTRAINT pk_cities PRIMARY KEY (id),
-    CONSTRAINT FK_CITIES_ON_REGION FOREIGN KEY (region_id) REFERENCES orng_office.regions (id)
-);
-
-CREATE TABLE orng_office.offices
-(
-    id         BIGSERIAL    NOT NULL,
+    id         BIGSERIAL PRIMARY KEY,
     code       VARCHAR(255) NOT NULL,
     name       VARCHAR(255) NOT NULL,
     address    VARCHAR(255) NOT NULL UNIQUE,
-    is_enabled BOOLEAN      NOT NULL,
-    city_id    BIGINT       NOT NULL,
+    city_id    INTEGER      NOT NULL,
     created_at TIMESTAMPTZ  NOT NULL,
-    updated_at TIMESTAMPTZ  NOT NULL,
-    CONSTRAINT pk_offices PRIMARY KEY (id),
-    CONSTRAINT FK_OFFICES_ON_CITY FOREIGN KEY (city_id) REFERENCES orng_office.cities (id)
+    updated_at TIMESTAMPTZ  NOT NULL
 );
 
-CREATE TABLE orng_office.offices_employees
+CREATE TABLE IF NOT EXISTS orng_office.offices_employees
 (
     office_id   BIGINT NOT NULL,
     employee_id BIGINT NOT NULL,
@@ -179,7 +158,7 @@ CREATE TABLE orng_office.offices_employees
     CONSTRAINT FK_OFFICES_EMPLOYEES_ON_OFFICE_ENTITY FOREIGN KEY (office_id) REFERENCES orng_office.offices (id)
 );
 
-CREATE TABLE orng_office.working_hours
+CREATE TABLE IF NOT EXISTS orng_office.working_hours
 (
     id          BIGSERIAL              NOT NULL,
     office_id   BIGINT                 NOT NULL,
@@ -191,54 +170,23 @@ CREATE TABLE orng_office.working_hours
     CONSTRAINT FK_WORKING_HOURS_ON_OFFICE FOREIGN KEY (office_id) REFERENCES orng_office.offices (id)
 );
 
--- Вставка данных в таблицу regions
-INSERT INTO orng_office.regions (name, code)
-VALUES ('Московская область', 'MOS'),
-       ('Ленинградская область', 'LEN'),
-       ('Свердловская область', 'SVE'),
-       ('Новосибирская область', 'NVS'),
-       ('Краснодарский край', 'KDA'),
-       ('Республика Татарстан', 'TA'),
-       ('Ростовская область', 'ROS'),
-       ('Нижегородская область', 'NIZ'),
-       ('Красноярский край', 'KYA'),
-       ('Челябинская область', 'CHE');
-
--- Вставка данных в таблицу cities
-INSERT INTO orng_office.cities (region_id, name, code)
-VALUES (1, 'Москва', 'MSK'),
-       (1, 'Химки', 'HIM'),
-       (1, 'Подольск', 'POD'),
-       (2, 'Санкт-Петербург', 'SPB'),
-       (2, 'Гатчина', 'GAT'),
-       (3, 'Екатеринбург', 'EKB'),
-       (3, 'Нижний Тагил', 'NTG'),
-       (4, 'Новосибирск', 'NVS'),
-       (5, 'Краснодар', 'KRR'),
-       (5, 'Сочи', 'SOC'),
-       (6, 'Казань', 'KZN'),
-       (7, 'Ростов-на-Дону', 'ROV'),
-       (8, 'Нижний Новгород', 'NNG'),
-       (9, 'Красноярск', 'KJA'),
-       (10, 'Челябинск', 'CHE');
-
 -- Вставка данных в таблицу offices
-INSERT INTO orng_office.offices (code, name, address, is_enabled, city_id, created_at, updated_at)
-VALUES ('MOS001', 'Главный офис Москва', 'ул. Тверская, д. 10', TRUE, 1, '2023-01-15 10:00:00',
+INSERT INTO orng_office.offices (code, name, address, city_id, created_at, updated_at)
+VALUES ('MOS001', 'Главный офис Москва', 'ул. Тверская, д. 10', 1, '2023-01-15 10:00:00',
         '2024-01-15 09:30:00'),
-       ('LED001', 'Офис в Санкт-Петербурге', 'Невский пр., д. 25', TRUE, 4, '2023-02-20 14:00:00',
+       ('LED001', 'Офис в Санкт-Петербурге', 'Невский пр., д. 25', 4, '2023-02-20 14:00:00',
         '2024-01-10 11:20:00'),
-       ('EKB001', 'Екатеринбург Центральный', 'ул. Ленина, д. 50', TRUE, 6, '2023-03-10 09:00:00',
+       ('EKB001', 'Екатеринбург Центральный', 'ул. Ленина, д. 50', 6, '2023-03-10 09:00:00',
         '2024-01-12 16:45:00'),
-       ('NVS001', 'Новосибирск Западный', 'ул. Кирова, д. 33', TRUE, 8, '2023-04-05 11:30:00',
+       ('NVS001', 'Новосибирск Западный', 'ул. Кирова, д. 33', 8, '2023-04-05 11:30:00',
         '2024-01-08 14:15:00'),
-       ('KRR001', 'Краснодар Южный', 'ул. Красная, д. 15', TRUE, 9, '2023-05-12 13:00:00',
+       ('KRR001', 'Краснодар Южный', 'ул. Красная, д. 15', 9, '2023-05-12 13:00:00',
         '2024-01-05 10:00:00'),
-       ('KZN001', 'Казань Центр', 'ул. Баумана, д. 12', TRUE, 11, '2023-06-08 10:30:00',
+       ('KZN001', 'Казань Центр', 'ул. Баумана, д. 12', 11, '2023-06-08 10:30:00',
         '2024-01-03 09:45:00'),
-       ('HIM001', 'Химки Бизнес-парк', 'ул. Ленинградская, д. 5', FALSE, 2, '2023-07-01 15:00:00',
+       ('HIM001', 'Химки Бизнес-парк', 'ул. Ленинградская, д. 5', 2, '2023-07-01 15:00:00',
         '2023-12-20 17:30:00'),
-       ('SOC001', 'Сочи Олимпийский', 'ул. Орджоникидзе, д. 8', TRUE, 10, '2023-08-14 16:00:00',
+       ('SOC001', 'Сочи Олимпийский', 'ул. Орджоникидзе, д. 8', 10, '2023-08-14 16:00:00',
         '2024-01-02 13:20:00');
 
 -- Вставка данных в таблицу offices_employees (связь офисов с сотрудниками)
@@ -271,6 +219,7 @@ VALUES
     (1, 3, '09:00', '18:00'),
     (1, 4, '09:00', '18:00'),
     (1, 5, '09:00', '17:00'),
+
     -- Офис LED001 (Пн-Пт, сб короткий день)
     (2, 1, '10:00', '19:00'),
     (2, 2, '10:00', '19:00'),
@@ -278,30 +227,35 @@ VALUES
     (2, 4, '10:00', '19:00'),
     (2, 5, '10:00', '18:00'),
     (2, 6, '11:00', '15:00'),
+
     -- Офис EKB001
     (3, 1, '08:30', '17:30'),
     (3, 2, '08:30', '17:30'),
     (3, 3, '08:30', '17:30'),
     (3, 4, '08:30', '17:30'),
     (3, 5, '08:30', '16:30'),
+
     -- Офис NVS001
     (4, 1, '09:00', '18:00'),
     (4, 2, '09:00', '18:00'),
     (4, 3, '09:00', '18:00'),
     (4, 4, '09:00', '18:00'),
     (4, 5, '09:00', '17:00'),
+
     -- Офис KRR001
     (5, 1, '08:00', '17:00'),
     (5, 2, '08:00', '17:00'),
     (5, 3, '08:00', '17:00'),
     (5, 4, '08:00', '17:00'),
     (5, 5, '08:00', '16:00'),
+
     -- Офис KZN001
     (6, 1, '09:30', '18:30'),
     (6, 2, '09:30', '18:30'),
     (6, 3, '09:30', '18:30'),
     (6, 4, '09:30', '18:30'),
     (6, 5, '09:30', '17:30'),
+
     -- Офис SOC001
     (8, 1, '10:00', '19:00'),
     (8, 2, '10:00', '19:00'),
