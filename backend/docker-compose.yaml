@@ -42,6 +42,7 @@ services:
       DB_URL: jdbc:postgresql://database:${PG_PORT:-5432}/${DB_NAME:-orng}?currentSchema=orng_employee
       DB_USER: ${DB_USER:-orng}
       DB_PASS: ${DB_PASS:-orng}
+      OFFICE_SERVICE_URL: orng-office:8080
       LOGGING_LEVEL_DEFAULT: TRACE
     depends_on:
       - database
