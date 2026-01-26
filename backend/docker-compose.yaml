@@ -58,6 +58,7 @@ services:
       DB_PASS: ${DB_PASS:-orng}
       SERVER_PORT: 8080
       EMPLOYEE_SERVICE_URL: employee-service:8080
+      OFFICE_SERVICE_URL: orng-office:8080
       LOGGING_LEVEL_DEFAULT: TRACE
     depends_on:
       - database
