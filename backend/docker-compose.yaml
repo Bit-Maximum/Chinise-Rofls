@@ -1,7 +1,7 @@
 services:
 
   orng-auth:
-    image: bitmaximum/orng-auth:1.0.2
+    image: bitmaximum/orng-auth:latest
     container_name: orng-auth
     restart: unless-stopped
     ports:
@@ -13,8 +13,9 @@ services:
       ACCESS_TOKEN_EXIRATION_SECONDS: 15
       REFRESH_TOKEN_EXIRATION_SECONDS: 604800
       JWT-ISSUER: orng-auth
-      JWT-DEFAULT-USER-SCOPES: ROLE_DEFAULT
+      JWT-DEFAULT-USER-SCOPES: ROLE_MANAGER
       LOGGING_LEVEL_DEFAULT: TRACE
+      CORS_ALLOW_CREDENTIALS: https://kiberorange.ru,http://kiberorange.ru,https://front.kiberorange.ru,http://www.kiberorange.ru,http://localhost:9006,http://127.0.0.1:9006
     depends_on:
       - database
 

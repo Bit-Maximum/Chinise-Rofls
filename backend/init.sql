@@ -56,6 +56,14 @@ CREATE TABLE IF NOT EXISTS orng_employee.employees
     updated_at  TIMESTAMPTZ  NOT NULL DEFAULT NOW()
 );
 
+--
+-- alter table orng_employee.employees
+--     rename column office_id to city_id;
+--
+-- alter table orng_employee.employees
+--     add column is_substitution_group boolean not null default false;
+--
+
 create table if not exists orng_schedule.absence_types
 (
     id   bigserial primary key,
