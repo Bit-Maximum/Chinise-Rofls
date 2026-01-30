@@ -15,7 +15,7 @@ services:
       JWT-ISSUER: orng-auth
       JWT-DEFAULT-USER-SCOPES: ROLE_MANAGER
       LOGGING_LEVEL_DEFAULT: TRACE
-      CORS_ALLOW_CREDENTIALS: https://kiberorange.ru,http://kiberorange.ru,https://front.kiberorange.ru,http://www.kiberorange.ru,http://localhost:9006,http://127.0.0.1:9006
+      CORS_ALLOWED_ORIGINS: https://kiberorange.ru,http://kiberorange.ru,https://front.kiberorange.ru,http://www.kiberorange.ru,http://localhost:9006,http://127.0.0.1:9006
     depends_on:
       - database
 
