@@ -30,40 +30,6 @@ create table if not exists orng_schedule.shifts
     constraint shifts_time_chk check (start_at < end_at)
 );
 
-CREATE SCHEMA IF NOT EXISTS orng_employee;
-
-CREATE TABLE IF NOT EXISTS orng_employee.positions
-(
-    id   BIGSERIAL PRIMARY KEY,
-    code VARCHAR(255) NOT NULL UNIQUE,
-    name VARCHAR(255) NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS orng_employee.employees
-(
-    id          BIGSERIAL PRIMARY KEY,
-    user_id     BIGINT       NOT NULL UNIQUE,
-    office_id     BIGINT       NOT NULL,
-    code        VARCHAR(255) NOT NULL UNIQUE,
-    full_name   VARCHAR(255) NOT NULL,
-    email       VARCHAR(255),
-    phone       VARCHAR(255),
-    position_id BIGINT       NOT NULL REFERENCES orng_employee.positions (id),
-    status      VARCHAR(255) NOT NULL DEFAULT 'ACTIVE',
-    hired_at    DATE,
-    fired_at    DATE,
-    created_at  TIMESTAMPTZ  NOT NULL DEFAULT NOW(),
-    updated_at  TIMESTAMPTZ  NOT NULL DEFAULT NOW()
-);
-
---
--- alter table orng_employee.employees
---     rename column office_id to city_id;
---
--- alter table orng_employee.employees
---     add column is_substitution_group boolean not null default false;
---
-
 create table if not exists orng_schedule.absence_types
 (
     id   bigserial primary key,
@@ -87,74 +53,6 @@ insert into orng_schedule.absence_types(code, name)
 values ('sick', 'Больничный'),
        ('vacation', 'Отпуск')
 ON CONFLICT DO NOTHING;
-
-INSERT INTO orng_employee.positions (code, name)
-VALUES ('CLIENT_MANAGER', 'Менеджер по работе с клиентами'),
-       ('VIP_CLIENT_MANAGER', 'Менеджер по работе с ВИП клиентами'),
-       ('LEGAL_ENTITY_MANAGER', 'Менеджер по работе с юридическими лицами'),
-       ('OFFICE_HEAD', 'Руководитель офиса'),
-       ('CASHIER', 'Кассир')
-ON CONFLICT DO NOTHING;
-
--- INSERT INTO orng_employee.employees
--- (user_id, city_id, code, full_name, email, phone, position_id, status, hired_at, fired_at)
--- VALUES (1, 1, 'EMP-000001', 'Иванов Иван Иванович',
---         'ivanov.ii@example.com', '+79990000001',
---         (SELECT id FROM orng_employee.positions WHERE code = 'OFFICE_HEAD'),
---         'ACTIVE', DATE '2023-10-10', NULL),
---        (2, 1, 'EMP-000002', 'Петров Пётр Сергеевич',
---         'petrov.ps@example.com', '+79990000002',
---         (SELECT id FROM orng_employee.positions WHERE code = 'CLIENT_MANAGER'),
---         'ACTIVE', DATE '2024-02-01', NULL),
---        (3, 1, 'EMP-000003', 'Сидорова Анна Владимировна',
---         'sidorova.av@example.com', '+79990000003',
---         (SELECT id FROM orng_employee.positions WHERE code = 'VIP_CLIENT_MANAGER'),
---         'ACTIVE', DATE '2024-03-12', NULL),
---        (4, 1, 'EMP-000004', 'Кузнецов Дмитрий Олегович',
---         'kuznetsov.do@example.com', '+79990000004',
---         (SELECT id FROM orng_employee.positions WHERE code = 'LEGAL_ENTITY_MANAGER'),
---         'ACTIVE', DATE '2024-04-05', NULL),
---        (5, 1, 'EMP-000005', 'Морозова Елена Николаевна',
---         'morozova.en@example.com', '+79990000005',
---         (SELECT id FROM orng_employee.positions WHERE code = 'CASHIER'),
---         'ACTIVE', DATE '2024-01-15', NULL),
---        (6, 1, 'EMP-000006', 'Смирнов Артём Андреевич',
---         'smirnov.aa@example.com', '+79990000006',
---         (SELECT id FROM orng_employee.positions WHERE code = 'CASHIER'),
---         'ACTIVE', DATE '2024-06-01', NULL),
---        (7, 1, 'EMP-000007', 'Орлова Мария Игоревна',
---         'orlova.mi@example.com', '+79990000007',
---         (SELECT id FROM orng_employee.positions WHERE code = 'CLIENT_MANAGER'),
---         'ACTIVE', DATE '2024-07-18', NULL),
---        (8, 2, 'EMP-000008', 'Васильев Алексей Николаевич',
---         'vasilev.an@example.com', '+79990000008',
---         (SELECT id FROM orng_employee.positions WHERE code = 'OFFICE_HEAD'),
---         'ACTIVE', DATE '2022-09-01', NULL),
---        (9, 2, 'EMP-000009', 'Фёдорова Ольга Сергеевна',
---         'fedorova.os@example.com', '+79990000009',
---         (SELECT id FROM orng_employee.positions WHERE code = 'VIP_CLIENT_MANAGER'),
---         'ACTIVE', DATE '2023-11-20', NULL),
---        (10, 2, 'EMP-000010', 'Никитин Павел Дмитриевич',
---         'nikitin.pd@example.com', '+79990000010',
---         (SELECT id FROM orng_employee.positions WHERE code = 'LEGAL_ENTITY_MANAGER'),
---         'ACTIVE', DATE '2024-02-10', NULL),
---        (11, 2, 'EMP-000011', 'Захарова Ирина Викторовна',
---         'zaharova.iv@example.com', '+79990000011',
---         (SELECT id FROM orng_employee.positions WHERE code = 'CLIENT_MANAGER'),
---         'ACTIVE', DATE '2024-03-25', NULL),
---        (12, 2, 'EMP-000012', 'Громов Максим Евгеньевич',
---         'gromov.me@example.com', '+79990000012',
---         (SELECT id FROM orng_employee.positions WHERE code = 'CASHIER'),
---         'ACTIVE', DATE '2024-01-09', NULL),
---        (13, 2, 'EMP-000013', 'Белова Татьяна Андреевна',
---         'belova.ta@example.com', '+79990000013',
---         (SELECT id FROM orng_employee.positions WHERE code = 'CASHIER'),
---         'FIRED', DATE '2023-12-05', DATE '2025-01-31'),
---        (14, 2, 'EMP-000014', 'Комаров Илья Романович',
---         'komarov.ir@example.com', '+79990000014',
---         (SELECT id FROM orng_employee.positions WHERE code = 'CLIENT_MANAGER'),
---         'ACTIVE', DATE '2024-08-02', NULL)
--- ON CONFLICT DO NOTHING;
 
 
 -- employee 2: SICK 2026-01-08
