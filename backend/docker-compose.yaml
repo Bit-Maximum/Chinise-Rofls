@@ -48,6 +48,7 @@ services:
       DB_USER: ${DB_USER:-orng}
       DB_PASS: ${DB_PASS:-orng}
       OFFICE_SERVICE_URL: orng-office:8080
+      JWT-ISSUER: orng-auth
       LOGGING_LEVEL_DEFAULT: TRACE
       CORS_ALLOWED_ORIGINS: https://kiberorange.ru,http://kiberorange.ru,https://front.kiberorange.ru,http://www.kiberorange.ru,http://localhost:9006,http://127.0.0.1:9006
       JWT_PUBLIC_KEY: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvfAhzQBtQZBLLoDSL6FjAoqSpvIny+7XDoPJCzIuAQRhVwlVLYA7Xwjo5o4XVJpeipzXcNks3UMUL5FxvOkfLJHopmbUL16IOz8shr2zSQGF+xJXjuSvRYGGXV3JepuE9ItqNwZNIFpGpa5WwF9RPt2BQQp422tyQEOZpNGt1Hg4j1ZnQAc+9Uu730A9UNwr/yzr27Wvl9nr8s5bUR2XajHvx0F2PuefD0CyXpIy9RdJE2uHl4O7diG73783Ynv6qh2XvS+98gDeSaZaVYj8Mru7+FFdgkDoWaLHYSZa5uFw5/bUmzlCXO6y04/qmaZ+RZ8JOKG4h2+HBAMZEUDM2QIDAQAB
@@ -67,6 +68,7 @@ services:
       SERVER_PORT: 8080
       EMPLOYEE_SERVICE_URL: employee-service:8080
       OFFICE_SERVICE_URL: orng-office:8080
+      JWT-ISSUER: orng-auth
       LOGGING_LEVEL_DEFAULT: TRACE
       CORS_ALLOWED_ORIGINS: https://kiberorange.ru,http://kiberorange.ru,https://front.kiberorange.ru,http://www.kiberorange.ru,http://localhost:9006,http://127.0.0.1:9006
       JWT_PUBLIC_KEY: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvfAhzQBtQZBLLoDSL6FjAoqSpvIny+7XDoPJCzIuAQRhVwlVLYA7Xwjo5o4XVJpeipzXcNks3UMUL5FxvOkfLJHopmbUL16IOz8shr2zSQGF+xJXjuSvRYGGXV3JepuE9ItqNwZNIFpGpa5WwF9RPt2BQQp422tyQEOZpNGt1Hg4j1ZnQAc+9Uu730A9UNwr/yzr27Wvl9nr8s5bUR2XajHvx0F2PuefD0CyXpIy9RdJE2uHl4O7diG73783Ynv6qh2XvS+98gDeSaZaVYj8Mru7+FFdgkDoWaLHYSZa5uFw5/bUmzlCXO6y04/qmaZ+RZ8JOKG4h2+HBAMZEUDM2QIDAQAB
