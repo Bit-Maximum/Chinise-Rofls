@@ -125,7 +125,7 @@ CREATE TABLE IF NOT EXISTS orng_office.offices
     code       VARCHAR(255) NOT NULL,
     name       VARCHAR(255) NOT NULL,
     address    VARCHAR(255) NOT NULL UNIQUE,
-    city_id    INTEGER      NOT NULL,
+    city_id    BIGINT      NOT NULL,
     created_at TIMESTAMPTZ  NOT NULL,
     updated_at TIMESTAMPTZ  NOT NULL
 );
