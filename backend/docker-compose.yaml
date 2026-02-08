@@ -10,11 +10,18 @@ services:
       DB_URL: jdbc:postgresql://database:${PG_PORT:-5432}/${DB_NAME:-orng}?currentSchema=orng_auth
       DB_USER: orng
       DB_PASS: orng
-      ACCESS_TOKEN_EXIRATION_SECONDS: 300
+      SERVER_PORT: 8080
+
+      ACCESS_TOKEN_EXIRATION_SECONDS: 899999999
       REFRESH_TOKEN_EXIRATION_SECONDS: 604800
+
       JWT-ISSUER: orng-auth
       JWT-DEFAULT-USER-SCOPES: ROLE_MANAGER
       LOGGING_LEVEL_DEFAULT: TRACE
+
+      EMPLOYEE_SERVICE_URL: employee-service:8080
+      SCHEDULE_SERVICE_URL: schedule-service:8080
+      OFFICE_SERVICE_URL: orng-office:8080
       JWT_PRIVATE_KEY: MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC98CHNAG1BkEsugNIvoWMCipKm8ifL7tcOg8kLMi4BBGFXCVUtgDtfCOjmjhdUml6KnNdw2SzdQxQvkXG86R8skeimZtQvXog7PyyGvbNJAYX7EleO5K9FgYZdXcl6m4T0i2o3Bk0gWkalrlbAX1E+3YFBCnjba3JAQ5mk0a3UeDiPVmdABz71S7vfQD1Q3Cv/LOvbta+X2evyzltRHZdqMe/HQXY+558PQLJekjL1F0kTa4eXg7t2Ibvfvzdie/qqHZe9L73yAN5JplpViPwyu7v4UV2CQOhZosdhJlrm4XDn9tSbOUJc7rLTj+qZpn5Fnwk4obiHb4cEAxkRQMzZAgMBAAECggEAIkGpFvw4uFZ5+M0rG4QUA2VSxeFu5A0TpH6ISAio224a0EPSpP43txA4UTzXYF7nJkDbanMA8HcksN+ej9/Ly5IVT83D/zchgu4F7ddQ+p3XuEy6lf8QzYxq23QK3p4mAKUUZxAv4OHnVAJ5iwCl+pygr0ZgPdLHLGgE0gEvRN6JuhhWszmdRWtLXy2Cx8QxutaYYY5QVhvXfpSOfYWIQeDfKGfZQtUrHYHPe0DKKUG77nl1IGxk3K/rC3N57z12wKZOMiG8iZQBSc3kodVZhinEsXz8rANXPvlPBN1HX/tcmioqfM+LZRdVQslRwpYWl6+YzBCiKvPLvAEbVCv08QKBgQD7fc3xo02oWPjqfjXAvkU57uCJqneUqqglRqzyacn0Kur/aGWlPo/dufTQQYG6XgQJ7Q6r2csnvN1k/7Nr6VE8y91sRHNQgJd6UBtz+OojehnRFbDFu0ajBGKNXUltD8tFBVyyTQQiwPAqEgLoQJluHUXhURhuhIrWgwZgA9NQ9wKBgQDBV9WLoFtSMQ9QVEltH9LGxKkvKY9/wgwkh6gv8NsXx/WRetzR5W8al/vQKFIbrOivKV1jBVVayFL8cbU39yTk5M/VAKoXFb4OK0mc0QMYO89Wf9RaPwzptkSD3abHQuKcvBPAmxfse3KoavLgplSu1J0Qx+JizBlN1VlvNq4srwKBgCdw1Wl9+OHcAj2USY3OyUCKrAArEdHo6bHe4aSq3pdCW9RuZPKDW0CktzYp79RwhiWgXdqpr2it//Kk/1h/INRuDG28VnFbmWX/Ri7r7Jxfu8jEpBJ+ildqiqIs7SUDgxdx/dWgqnNg2sleRcJyzx0rzhfGBhTfCH8X0Vohf3SFAoGAOawWofCybOD/fWm3AVsVx37QLKZMDML4Vkk07R/+aqiV4tBwYBf9PUSKs7vjSigYvG8tUSU9IbhRsMXGVaxeD/0E1be+BObSa22UJrfeIXNt1JKK6GSYWHqrE16hqhyUdkZP6gsZZswoFn7YdhSHfCMluuS07d2Nyr7ST69S4zcCgYAzff35tsUsO7MlMNSxPkz+gSLlDgWXcziOdOk9wqXmI0ZRQ+69mPqLmRnI2JEzbzR1PyovWKl0FTkJVo1sjgi2zbY2mKOtZ/9fZQBRPNN0LD8Z2MMaNNBsUzI2AhdhlEQfRTjjvEDZWj8aQhQO9OAmHhQQtQ5ltuWDoboM+/lThg==
       JWT_PUBLIC_KEY: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvfAhzQBtQZBLLoDSL6FjAoqSpvIny+7XDoPJCzIuAQRhVwlVLYA7Xwjo5o4XVJpeipzXcNks3UMUL5FxvOkfLJHopmbUL16IOz8shr2zSQGF+xJXjuSvRYGGXV3JepuE9ItqNwZNIFpGpa5WwF9RPt2BQQp422tyQEOZpNGt1Hg4j1ZnQAc+9Uu730A9UNwr/yzr27Wvl9nr8s5bUR2XajHvx0F2PuefD0CyXpIy9RdJE2uHl4O7diG73783Ynv6qh2XvS+98gDeSaZaVYj8Mru7+FFdgkDoWaLHYSZa5uFw5/bUmzlCXO6y04/qmaZ+RZ8JOKG4h2+HBAMZEUDM2QIDAQAB
       CORS_ALLOWED_ORIGINS: https://kiberorange.ru,http://kiberorange.ru,https://front.kiberorange.ru,http://www.kiberorange.ru,http://localhost:9006,http://127.0.0.1:9006
@@ -32,10 +39,14 @@ services:
       DB_USER: ${DB_USER:-orng}
       DB_PASS: ${DB_PASS:-orng}
       JWT-ISSUER: orng-auth
+      SERVER_PORT: 8080
+
       LOGGING_LEVEL_DEFAULT: TRACE
       CORS_ALLOWED_ORIGINS: https://kiberorange.ru,http://kiberorange.ru,https://front.kiberorange.ru,http://www.kiberorange.ru,http://localhost:9006,http://127.0.0.1:9006
       JWT_PUBLIC_KEY: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvfAhzQBtQZBLLoDSL6FjAoqSpvIny+7XDoPJCzIuAQRhVwlVLYA7Xwjo5o4XVJpeipzXcNks3UMUL5FxvOkfLJHopmbUL16IOz8shr2zSQGF+xJXjuSvRYGGXV3JepuE9ItqNwZNIFpGpa5WwF9RPt2BQQp422tyQEOZpNGt1Hg4j1ZnQAc+9Uu730A9UNwr/yzr27Wvl9nr8s5bUR2XajHvx0F2PuefD0CyXpIy9RdJE2uHl4O7diG73783Ynv6qh2XvS+98gDeSaZaVYj8Mru7+FFdgkDoWaLHYSZa5uFw5/bUmzlCXO6y04/qmaZ+RZ8JOKG4h2+HBAMZEUDM2QIDAQAB
       EMPLOYEE_SERVICE_URL: employee-service:8080
+      SCHEDULE_SERVICE_URL: schedule-service:8080
+      OFFICE_SERVICE_URL: orng-office:8080
     depends_on:
       - database
 
@@ -48,11 +59,17 @@ services:
       DB_URL: jdbc:postgresql://database:${PG_PORT:-5432}/${DB_NAME:-orng}?currentSchema=orng_employee
       DB_USER: ${DB_USER:-orng}
       DB_PASS: ${DB_PASS:-orng}
+      SERVER_PORT: 8080
+
+      EMPLOYEE_SERVICE_URL: employee-service:8080
+      SCHEDULE_SERVICE_URL: schedule-service:8080
       OFFICE_SERVICE_URL: orng-office:8080
+
       JWT-ISSUER: orng-auth
       LOGGING_LEVEL_DEFAULT: TRACE
       CORS_ALLOWED_ORIGINS: https://kiberorange.ru,http://kiberorange.ru,https://front.kiberorange.ru,http://www.kiberorange.ru,http://localhost:9006,http://127.0.0.1:9006
       JWT_PUBLIC_KEY: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvfAhzQBtQZBLLoDSL6FjAoqSpvIny+7XDoPJCzIuAQRhVwlVLYA7Xwjo5o4XVJpeipzXcNks3UMUL5FxvOkfLJHopmbUL16IOz8shr2zSQGF+xJXjuSvRYGGXV3JepuE9ItqNwZNIFpGpa5WwF9RPt2BQQp422tyQEOZpNGt1Hg4j1ZnQAc+9Uu730A9UNwr/yzr27Wvl9nr8s5bUR2XajHvx0F2PuefD0CyXpIy9RdJE2uHl4O7diG73783Ynv6qh2XvS+98gDeSaZaVYj8Mru7+FFdgkDoWaLHYSZa5uFw5/bUmzlCXO6y04/qmaZ+RZ8JOKG4h2+HBAMZEUDM2QIDAQAB
+
     depends_on:
       - database
     restart: unless-stopped
@@ -67,8 +84,11 @@ services:
       DB_USER: ${DB_USER:-orng}
       DB_PASS: ${DB_PASS:-orng}
       SERVER_PORT: 8080
+
       EMPLOYEE_SERVICE_URL: employee-service:8080
+      SCHEDULE_SERVICE_URL: schedule-service:8080
       OFFICE_SERVICE_URL: orng-office:8080
+
       JWT-ISSUER: orng-auth
       LOGGING_LEVEL_DEFAULT: TRACE
       CORS_ALLOWED_ORIGINS: https://kiberorange.ru,http://kiberorange.ru,https://front.kiberorange.ru,http://www.kiberorange.ru,http://localhost:9006,http://127.0.0.1:9006
@@ -78,23 +98,77 @@ services:
       - employee-service
     restart: unless-stopped
 
+  orng-catalog:
+    image: bitmaximum/orng-catalog:latest
+    container_name: ${CATALOG_HOST:-orng-catalog}
+    hostname: ${CATALOG_HOST:-orng-catalog}
+    restart: unless-stopped
+    ports:
+      - "${CATALOG_PORT:-8084}:8080"
+    environment:
+      DB_URL: ${DB_URL:-jdbc:postgresql://${DB_HOST:-database}:${DB_PORT:-5432}/${DB_NAME:-orng}?currentSchema=orng_catalog}
+      DB_USER: ${DB_USER:-orng}
+      DB_PASS: ${DB_PASS:-orng}
+
+      JWT_PUBLIC_KEY: ${JWT_PUBLIC_KEY:-MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAy8yvJf6pae3Bh6eahVs8JIEKcc6Z2EOfGbRuEe4BEiCCJnRn1UwNFna+yO2qbXa3XjN/0SyQ59Y8jyOQupu99ZexJecZG/diV/3Sr6uhT4jEWvP3VdbErY6aXG/x9C3RO/8VQwSP2946g61mB8MF0t+EoQoUMksmPCwPYr4viPIHBrwhhUBPevl5QB19RZh2KlQX6GpfcwZTrelZ5FeRQIJ49LtSQ3BTERDRxg37EMazHeBnr8TMWOsOY7A8fCgGDGynuE1ANpg8fZhdADsMwxUgHY/1aRumUCv4nVbgfYBSleLjB5uIhkVp1HsC0QCPF8/DOsusmxDlrfeFmd0d0wIDAQAB}
+      JWT-ISSUER: ${JWT-ISSUER:-orng-auth}
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS:-http://localhost:8080}
+      LOGGING_LEVEL_DEFAULT: ${LOGGING_LEVEL_DEFAULT:-INFO}
+
+      REDIS_HOST: ${REDIS_HOST:-redis}
+      REDIS_PORT: ${REDIS_PORT:-6379}
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-orng}
+    depends_on:
+      database:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
   database:
     image: 'postgres:18-alpine'
-    container_name: 'postgres'
-    restart: always
+    container_name: ${DB_HOST:-database}
+    hostname: ${DB_HOST:-database}
+    restart: unless-stopped
     environment:
-      - POSTGRES_USER=orng
-      - POSTGRES_PASSWORD=orng
-      - POSTGRES_DB=orng
+      POSTGRES_USER: ${DB_USER:-orng}
+      POSTGRES_PASSWORD: ${DB_PASS:-orng}
+      POSTGRES_DB: ${DB_NAME:-orng}
     volumes:
       - db:/var/lib/postgresql/data postgres
       - type: bind
         source: ./init.sql
         target: /docker-entrypoint-initdb.d/init.sql
     ports:
-      - "5432:5432"
+      - "${DB_PORT:-5432}:5432"
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-d", "${DB_NAME:-orng}", "-U", "${DB_USER:-orng}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+
+  redis:
+    image: redis:8.4-alpine
+    container_name: ${REDIS_HOST:-redis}
+    hostname: ${REDIS_HOST:-redis}
+    restart: unless-stopped
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-orng}
+    command: >
+      redis-server
+      --requirepass ${REDIS_PASSWORD:-orng}
+      --appendonly yes
+    healthcheck:
+      test: [ "CMD", "redis-cli", "-a", "${REDIS_PASSWORD:-orng}", "ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+    volumes:
+      - redis-data:/data
 
 volumes:
-  npm_data:
-  npm_letsencrypt:
   db:
+  redis-data:
