@@ -109,10 +109,17 @@ services:
       SYSTEM_USER_USERNAME: system
       SYSTEM_USER_PASSWORD: 12345678
     depends_on:
+      - orng-employee
       - database
       - redis
       - rabbitmq
       - mailcatcher
+    healthcheck:
+      test: [ "CMD-SHELL", "wget -qO- http://localhost:8080/actuator/health | grep -q '\"status\":\"UP\"'" ]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 60s
 
   orng-employee:
     image: rumarsky/orng-employee:latest
@@ -412,9 +419,6 @@ services:
       POSTGRES_DB: ${DB_NAME:-orng}
     volumes:
       - db:/var/lib/postgresql/data postgres
-      - type: bind
-        source: ./init.sql
-        target: /docker-entrypoint-initdb.d/init.sql
     ports:
       - "${DB_PORT:-5432}:5432"
     healthcheck:
@@ -423,6 +427,24 @@ services:
       timeout: 5s
       retries: 5
       start_period: 5s
+
+  db-seed:
+    image: postgres:18-alpine
+    container_name: db-seed
+    depends_on:
+      orng-office:
+        condition: service_healthy
+    volumes:
+      - ./init.sql:/seed/init.sql:ro
+    environment:
+      PGPASSWORD: ${DB_PASS:-orng}
+    command: >
+      sh -lc "
+        echo 'Seeding demo data...';
+        psql -h database -U ${DB_USER:-orng} -d ${DB_NAME:-orng} -v ON_ERROR_STOP=1 -f /seed/init.sql;
+        echo 'Seed done.'
+      "
+    restart: no
 
   prometheus:
     image: prom/prometheus:v3.5.1
