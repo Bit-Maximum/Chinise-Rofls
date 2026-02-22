@@ -538,6 +538,9 @@ services:
       - SWAGGER_JSON_URL=/swagger-config.json
     ports:
       - "9080:8080"
+    depends_on:
+      orng-office:
+        condition: service_healthy
 
 volumes:
   db:
