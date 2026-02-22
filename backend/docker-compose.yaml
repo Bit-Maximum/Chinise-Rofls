@@ -7,7 +7,7 @@ services:
     ports:
       - "${AUTH_PORT:-8080}:8080"
     environment:
-      DB_URL: jdbc:postgresql://database:${PG_PORT:-5432}/${DB_NAME:-orng}?currentSchema=orng_catalog
+      DB_URL: jdbc:postgresql://database:${PG_PORT:-5432}/${DB_NAME:-orng}?currentSchema=orng_auth
       DB_USER: orng
       DB_PASS: orng
       SERVER_PORT: 8080
@@ -63,7 +63,7 @@ services:
     ports:
       - "${OFFICE_PORT:-8081}:8080"
     environment:
-      DB_URL: jdbc:postgresql://database:${PG_PORT:-5432}/${DB_NAME:-orng}?currentSchema=orng_catalog
+      DB_URL: jdbc:postgresql://database:${PG_PORT:-5432}/${DB_NAME:-orng}?currentSchema=orng_office
       DB_USER: orng
       DB_PASS: orng
       SERVER_PORT: 8080
@@ -118,7 +118,7 @@ services:
     ports:
       - "${EM_PORT:-8082}:8080"
     environment:
-      DB_URL: jdbc:postgresql://database:${PG_PORT:-5432}/${DB_NAME:-orng}?currentSchema=orng_catalog
+      DB_URL: jdbc:postgresql://database:${PG_PORT:-5432}/${DB_NAME:-orng}?currentSchema=orng_employee
       DB_USER: orng
       DB_PASS: orng
       SERVER_PORT: 8080
@@ -173,7 +173,7 @@ services:
     ports:
       - "${SS_PORT:-8083}:8080"
     environment:
-      DB_URL: jdbc:postgresql://database:${PG_PORT:-5432}/${DB_NAME:-orng}?currentSchema=orng_catalog
+      DB_URL: jdbc:postgresql://database:${PG_PORT:-5432}/${DB_NAME:-orng}?currentSchema=orng_schedule
       DB_USER: orng
       DB_PASS: orng
       SERVER_PORT: 8080
@@ -282,13 +282,13 @@ services:
 
   orng-application:
     image: rumarsky/orng-application:latest
-    container_name: ${APPLICATION_HOST:orng-application}
-    hostname: ${APPLICATION_HOST:orng-application}
+    container_name: ${APPLICATION_HOST:-orng-application}
+    hostname: ${APPLICATION_HOST:-orng-application}
     restart: unless-stopped
     ports:
       - "${CATALOG_PORT:-8085}:8080"
     environment:
-      DB_URL: jdbc:postgresql://database:${PG_PORT:-5432}/${DB_NAME:-orng}?currentSchema=orng_catalog
+      DB_URL: jdbc:postgresql://database:${PG_PORT:-5432}/${DB_NAME:-orng}?currentSchema=orng_application
       DB_USER: orng
       DB_PASS: orng
       SERVER_PORT: 8080
@@ -339,13 +339,13 @@ services:
 
   orng-notification:
     image: bitmaximum/orng-notification:latest
-    container_name: ${NOTIFICATION_HOST:orng-application}
-    hostname: ${NOTIFICATION_HOST:orng-application}
+    container_name: ${NOTIFICATION_HOST:-orng-notification}
+    hostname: ${NOTIFICATION_HOST:-orng-notification}
     restart: unless-stopped
     ports:
-      - "${CATALOG_PORT:-8085}:8080"
+      - "${CATALOG_PORT:-8086}:8080"
     environment:
-      DB_URL: jdbc:postgresql://database:${PG_PORT:-5432}/${DB_NAME:-orng}?currentSchema=orng_catalog
+      DB_URL: jdbc:postgresql://database:${PG_PORT:-5432}/${DB_NAME:-orng}?currentSchema=orng_notification
       DB_USER: orng
       DB_PASS: orng
       SERVER_PORT: 8080
