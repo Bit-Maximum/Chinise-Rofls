@@ -533,7 +533,7 @@ services:
     container_name: swagger-ui
     restart: unless-stopped
     volumes:
-      - ./swagger:/usr/share/nginx/html:ro
+      - ./swagger-config.json:/usr/share/nginx/html/swagger-config.json:ro
     environment:
       - SWAGGER_JSON_URL=/swagger-config.json
     ports:
