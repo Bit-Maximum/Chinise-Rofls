@@ -1,0 +1,14 @@
+{
+  "urls": [
+    { "name": "Auth",         "url": "/auth/v3/api-docs" },
+    { "name": "Office",       "url": "/office/v3/api-docs" },
+    { "name": "Employee",     "url": "/employee/v3/api-docs" },
+    { "name": "Schedule",     "url": "/schedule/v3/api-docs" },
+    { "name": "Catalog",      "url": "/catalog/v3/api-docs" },
+    { "name": "Application",  "url": "/application/v3/api-docs" },
+    { "name": "Notification", "url": "/notification/v3/api-docs" }
+  ],
+  "persistAuthorization": true,
+  "docExpansion": "none",
+  "displayRequestDuration": true
+}

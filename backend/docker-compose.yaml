@@ -528,6 +528,17 @@ services:
       - "1080:1080"
       - "1025:1025"
 
+  swagger-ui:
+    image: swaggerapi/swagger-ui:v5.31.2
+    container_name: swagger-ui
+    restart: unless-stopped
+    volumes:
+      - ./swagger:/usr/share/nginx/html:ro
+    environment:
+      - SWAGGER_JSON_URL=/swagger-config.json
+    ports:
+      - "9080:8080"
+
 volumes:
   db:
   grafana-storage:
