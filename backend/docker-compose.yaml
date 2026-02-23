@@ -532,8 +532,6 @@ services:
     image: swaggerapi/swagger-ui:v5.31.2
     container_name: swagger-ui
     restart: unless-stopped
-#    volumes:
-#      - ./swagger-config.json:/usr/share/nginx/html/swagger-config.json:ro
     environment:
       URLS: "[{ 'name': 'Авторизация', 'url': 'https://auth.kiberorange.ru/v3/api-docs' },{ 'name': 'Офисы', 'url': 'https://office.kiberorange.ru/v3/api-docs' },{ 'name': 'Сотрудники', 'url': 'https://employee.kiberorange.ru/v3/api-docs' },{ 'name': 'Расписание', 'url': 'https://schedule.kiberorange.ru/v3/api-docs' },{ 'name': 'Справочники', 'url': 'https://catalog.kiberorange.ru/v3/api-docs' },{ 'name': 'Заявки', 'url': 'https://application.kiberorange.ru/v3/api-docs' },{ 'name': 'Уведомления', 'url': 'https://notification.kiberorange.ru/v3/api-docs' }]"
     ports:

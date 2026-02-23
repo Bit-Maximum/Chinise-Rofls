@@ -1,7 +1,19 @@
 global:
   scrape_interval: 10s
 scrape_configs:
+  - job_name: orng-auth
+    static_configs:
+      - targets: [ "orng-auth:8080" ]
+    metrics_path: "/actuator/prometheus"
   - job_name: orng-office
     static_configs:
       - targets: [ "orng-office:8080" ]
+    metrics_path: "/actuator/prometheus"
+  - job_name: orng-catalog
+    static_configs:
+      - targets: [ "orng-catalog:8080" ]
+    metrics_path: "/actuator/prometheus"
+  - job_name: orng-notification
+    static_configs:
+      - targets: [ "orng-notification:8080" ]
     metrics_path: "/actuator/prometheus"
