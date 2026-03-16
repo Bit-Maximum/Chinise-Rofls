@@ -429,24 +429,6 @@ services:
       retries: 5
       start_period: 5s
 
-  db-seed:
-    image: postgres:18-alpine
-    container_name: db-seed
-    depends_on:
-      orng-office:
-        condition: service_healthy
-    volumes:
-      - ./init.sql:/seed/init.sql:ro
-    environment:
-      PGPASSWORD: ${DB_PASS:-orng}
-    command: >
-      sh -lc "
-        echo 'Seeding demo data...';
-        psql -h database -U ${DB_USER:-orng} -d ${DB_NAME:-orng} -v ON_ERROR_STOP=1 -f /seed/init.sql;
-        echo 'Seed done.'
-      "
-    restart: no
-
   prometheus:
     image: prom/prometheus:v3.5.1
     container_name: prometheus
