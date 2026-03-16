@@ -25,6 +25,7 @@ services:
       OFFICE_SERVICE_URL: orng-office:8080
       APPLICATION_SERVICE_URL: orng-application:8080
       CATALOG_SERVICE_URL: orng-catalog:8080
+      NOTIFICATION_SERVICE_URL: orng-notification:8080
       OLTP_URL: http://jaeger:4317
       JWT_PRIVATE_KEY: MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC98CHNAG1BkEsugNIvoWMCipKm8ifL7tcOg8kLMi4BBGFXCVUtgDtfCOjmjhdUml6KnNdw2SzdQxQvkXG86R8skeimZtQvXog7PyyGvbNJAYX7EleO5K9FgYZdXcl6m4T0i2o3Bk0gWkalrlbAX1E+3YFBCnjba3JAQ5mk0a3UeDiPVmdABz71S7vfQD1Q3Cv/LOvbta+X2evyzltRHZdqMe/HQXY+558PQLJekjL1F0kTa4eXg7t2Ibvfvzdie/qqHZe9L73yAN5JplpViPwyu7v4UV2CQOhZosdhJlrm4XDn9tSbOUJc7rLTj+qZpn5Fnwk4obiHb4cEAxkRQMzZAgMBAAECggEAIkGpFvw4uFZ5+M0rG4QUA2VSxeFu5A0TpH6ISAio224a0EPSpP43txA4UTzXYF7nJkDbanMA8HcksN+ej9/Ly5IVT83D/zchgu4F7ddQ+p3XuEy6lf8QzYxq23QK3p4mAKUUZxAv4OHnVAJ5iwCl+pygr0ZgPdLHLGgE0gEvRN6JuhhWszmdRWtLXy2Cx8QxutaYYY5QVhvXfpSOfYWIQeDfKGfZQtUrHYHPe0DKKUG77nl1IGxk3K/rC3N57z12wKZOMiG8iZQBSc3kodVZhinEsXz8rANXPvlPBN1HX/tcmioqfM+LZRdVQslRwpYWl6+YzBCiKvPLvAEbVCv08QKBgQD7fc3xo02oWPjqfjXAvkU57uCJqneUqqglRqzyacn0Kur/aGWlPo/dufTQQYG6XgQJ7Q6r2csnvN1k/7Nr6VE8y91sRHNQgJd6UBtz+OojehnRFbDFu0ajBGKNXUltD8tFBVyyTQQiwPAqEgLoQJluHUXhURhuhIrWgwZgA9NQ9wKBgQDBV9WLoFtSMQ9QVEltH9LGxKkvKY9/wgwkh6gv8NsXx/WRetzR5W8al/vQKFIbrOivKV1jBVVayFL8cbU39yTk5M/VAKoXFb4OK0mc0QMYO89Wf9RaPwzptkSD3abHQuKcvBPAmxfse3KoavLgplSu1J0Qx+JizBlN1VlvNq4srwKBgCdw1Wl9+OHcAj2USY3OyUCKrAArEdHo6bHe4aSq3pdCW9RuZPKDW0CktzYp79RwhiWgXdqpr2it//Kk/1h/INRuDG28VnFbmWX/Ri7r7Jxfu8jEpBJ+ildqiqIs7SUDgxdx/dWgqnNg2sleRcJyzx0rzhfGBhTfCH8X0Vohf3SFAoGAOawWofCybOD/fWm3AVsVx37QLKZMDML4Vkk07R/+aqiV4tBwYBf9PUSKs7vjSigYvG8tUSU9IbhRsMXGVaxeD/0E1be+BObSa22UJrfeIXNt1JKK6GSYWHqrE16hqhyUdkZP6gsZZswoFn7YdhSHfCMluuS07d2Nyr7ST69S4zcCgYAzff35tsUsO7MlMNSxPkz+gSLlDgWXcziOdOk9wqXmI0ZRQ+69mPqLmRnI2JEzbzR1PyovWKl0FTkJVo1sjgi2zbY2mKOtZ/9fZQBRPNN0LD8Z2MMaNNBsUzI2AhdhlEQfRTjjvEDZWj8aQhQO9OAmHhQQtQ5ltuWDoboM+/lThg==
       JWT_PUBLIC_KEY: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvfAhzQBtQZBLLoDSL6FjAoqSpvIny+7XDoPJCzIuAQRhVwlVLYA7Xwjo5o4XVJpeipzXcNks3UMUL5FxvOkfLJHopmbUL16IOz8shr2zSQGF+xJXjuSvRYGGXV3JepuE9ItqNwZNIFpGpa5WwF9RPt2BQQp422tyQEOZpNGt1Hg4j1ZnQAc+9Uu730A9UNwr/yzr27Wvl9nr8s5bUR2XajHvx0F2PuefD0CyXpIy9RdJE2uHl4O7diG73783Ynv6qh2XvS+98gDeSaZaVYj8Mru7+FFdgkDoWaLHYSZa5uFw5/bUmzlCXO6y04/qmaZ+RZ8JOKG4h2+HBAMZEUDM2QIDAQAB
@@ -47,7 +48,7 @@ services:
       EMAIL_USERNAME: admin@admin.com
       EMAIL_SMTP_AUTH: false
       EMAIL_USE_TLS: false
-      EMAIL_SITE_URL: http://localhost:9006
+      EMAIL_SITE_URL: https://kiberorange.ru
 
       SYSTEM_USER_USERNAME: system
       SYSTEM_USER_PASSWORD: 12345678
@@ -122,7 +123,7 @@ services:
       start_period: 60s
 
   orng-employee:
-    image: rumarsky/orng-employee:latest
+    image: bitmaximum/orng-employee:latest
     container_name: orng-employee
     ports:
       - "${EM_PORT:-8082}:8080"
@@ -178,7 +179,7 @@ services:
       - mailcatcher
 
   orng-schedule:
-    image: rumarsky/orng-schedule:latest
+    image: bitmaximum/orng-schedule:latest
     container_name: orng-schedule
     ports:
       - "${SS_PORT:-8083}:8080"
@@ -293,7 +294,7 @@ services:
 
 
   orng-application:
-    image: rumarsky/orng-application:latest
+    image: bitmaximum/orng-application:latest
     container_name: ${APPLICATION_HOST:-orng-application}
     hostname: ${APPLICATION_HOST:-orng-application}
     restart: unless-stopped

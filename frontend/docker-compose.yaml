@@ -8,4 +8,14 @@ services:
     ports:
       - "3000:80"
     environment:
-      BASE_URL: ${BASE_URL:-https://api.kiberorange.ru}
+      GENERATE_SOURCEMAP: false
+      REACT_APP_APPLICATION_VERSION: 2.1.0
+      BASE_URL_AUTH: https://auth.kiberorange.ru/
+      BASE_URL_OFFICE: https://office.kiberorange.ru/
+      BASE_URL_SCHEDULE: https://schedule.kiberorange.ru/
+      BASE_URL_EMPLOYEE: https://employee.kiberorange.ru/
+      BASE_URL_APPLICATION: https://application.kiberorange.ru/
+      BASE_URL_CATALOG: https://catalog.kiberorange.ru/
+      BASE_NAME: template-workflow-frontend
+      PUBLIC_URL: template-workflow-frontend
+      REACT_APP_WORKFLOW_API_URL: http://localhost:8090
