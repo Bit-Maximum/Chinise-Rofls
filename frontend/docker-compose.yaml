@@ -6,7 +6,7 @@ services:
     hostname: ${FRONTEND_HOSTNAME:-orng-frontend}
     restart: unless-stopped
     ports:
-      - "3000:80"
+      - "9006:80"
     environment:
       GENERATE_SOURCEMAP: false
       REACT_APP_APPLICATION_VERSION: 2.1.0
