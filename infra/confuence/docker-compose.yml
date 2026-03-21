@@ -29,10 +29,10 @@ services:
       ATL_TOMCAT_SCHEME: https
       ATL_TOMCAT_SECURE: "true"
 
-      JVM_MINIMUM_MEMORY: 768m
-      JVM_MAXIMUM_MEMORY: 1536m
+      JVM_MINIMUM_MEMORY: 300m
+      JVM_MAXIMUM_MEMORY: 600m
       JVM_RESERVED_CODE_CACHE_SIZE: 256m
-    mem_limit: 1800m
+    mem_limit: 2400m
     volumes:
       - confluence_data:/var/atlassian/application-data/confluence
 
