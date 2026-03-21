@@ -1,16 +1,14 @@
 services:
   db:
-    image: postgres:18-alpine
+    image: postgres:17-alpine
     container_name: confluence-db
     restart: unless-stopped
     environment:
       POSTGRES_DB: confluence
       POSTGRES_USER: confluence
       POSTGRES_PASSWORD: confluence
-    ports:
-      - "25432:5432"
     volumes:
-      - ./db_data:/var/lib/postgresql/data
+      - db_data:/var/lib/postgresql/data
 
   confluence:
     image: atlassian/confluence:10.2.6-ubi9
@@ -25,5 +23,14 @@ services:
       ATL_JDBC_USER: confluence
       ATL_JDBC_PASSWORD: confluence
       ATL_DB_TYPE: postgresql
+
+      ATL_PROXY_NAME: confluence.kiberorange.ru
+      ATL_PROXY_PORT: 443
+      ATL_TOMCAT_SCHEME: https
+      ATL_TOMCAT_SECURE: "true"
     volumes:
-      - ./data:/var/atlassian/application-data/confluence
+      - confluence_data:/var/atlassian/application-data/confluence
+
+volumes:
+  db_data:
+  confluence_data:
