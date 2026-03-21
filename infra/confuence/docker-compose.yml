@@ -29,8 +29,8 @@ services:
       ATL_TOMCAT_SCHEME: https
       ATL_TOMCAT_SECURE: "true"
 
-      JVM_MINIMUM_MEMORY: 300m
-      JVM_MAXIMUM_MEMORY: 600m
+      JVM_MINIMUM_MEMORY: 256m
+      JVM_MAXIMUM_MEMORY: 512m
       JVM_RESERVED_CODE_CACHE_SIZE: 256m
     mem_limit: 2400m
     volumes:
